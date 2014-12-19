@@ -12,7 +12,7 @@ import com.mashape.unirest.http.exceptions.UnirestException;
  *
  */
 
-public class TestMashApp {
+public class FeatureExtractor {
 
 	public static void main(String[] args) {
 

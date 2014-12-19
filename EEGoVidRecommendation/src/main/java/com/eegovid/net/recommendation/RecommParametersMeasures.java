@@ -13,6 +13,11 @@ import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;
 import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 
+/**
+ * @author Mohamed El-Refaey
+ *
+ */
+
 public class RecommParametersMeasures {
 	public static LogLikelihoodSimilarity getLogLikelihoodSimilarity(DataModel dataModel)
 			throws TasteException {
@@ -37,8 +42,8 @@ public class RecommParametersMeasures {
 		System.out.println("PearsonCorrelation");
 		return new PearsonCorrelationSimilarity(dataModel);
 	}
-	
-	
+
+
 
 	public static UserSimilarity getEuclideanDistance(DataModel dataModel)
 			throws TasteException {

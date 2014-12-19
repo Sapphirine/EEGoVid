@@ -18,17 +18,22 @@ import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.model.Preference;
 import org.apache.mahout.cf.taste.model.PreferenceArray;
 
+/**
+ * @author Mohamed El-Refaey
+ *
+ */
+
 public class InterestLevelDataModel {
 	public static final String EEG_INTEREST_LEVEL_DATASET_FILE = "Data/ratings.csv";
 
-	
-	public static DataModel generateDataModel(int dataset) throws Exception {			
+
+	public static DataModel generateDataModel(int dataset) throws Exception {
 		String data = EEG_INTEREST_LEVEL_DATASET_FILE;
 		File dataFile = new File(data);
 		return new FileDataModel(dataFile);
 	}
 
-	public static DataModel getPrefDataByFileFast() throws Exception {		
+	public static DataModel getPrefDataByFileFast() throws Exception {
 		String data = EEG_INTEREST_LEVEL_DATASET_FILE;
 		FastByIDMap<PreferenceArray> preferences = new FastByIDMap<PreferenceArray>();
 		BufferedReader br = new BufferedReader(new FileReader(data));
@@ -60,14 +65,14 @@ public class InterestLevelDataModel {
 	}
 
 	public static DataModel getNoPrefDataByFile() throws Exception {
-		
+
 		String data = EEG_INTEREST_LEVEL_DATASET_FILE;
 		return new GenericBooleanPrefDataModel(
 				GenericBooleanPrefDataModel.toDataMap(new FileDataModel(
 						new File(data))));
 	}
 
-	
+
 
 	public static DataModelBuilder createNoPrefDataModelBuilder()
 			throws TasteException {
