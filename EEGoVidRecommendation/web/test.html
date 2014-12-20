@@ -68,8 +68,8 @@
 	  		//Define circle property
 			node.append("circle")
 	  		.attr("class", "node")
-	  		.attr("r",function(d){return 10+d.value;})
-	  		.style("fill", function(d) { return color(d.value); });
+	  		.attr("r",function(d){return 10+d.group;})
+	  		.style("fill", function(d) { return color(d.group); });
 
 	  		//Define click pending
 	  		node.append("title")
