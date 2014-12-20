@@ -12,6 +12,6 @@
 				{"source" : 3 , "target" : 0, "value" : 1}, 
 				{"source" : 4 , "target" : 0, "value" : 3}, 
 				{"source" : 3 , "target" : 2, "value" : 5}, 
-				{"source" : 5 , "target" : 0, "value" : 4}, 
+				{"source" : 5 , "target" : 0, "value" : 4} 
     ]
 }
