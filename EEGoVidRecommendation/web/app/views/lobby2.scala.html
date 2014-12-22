@@ -1,0 +1,186 @@
+@(videos: List[models.Videos], output: java.util.ArrayList[java.util.ArrayList[String]], jsonname: String)
+<!DOCTYPE HTML>
+<head>
+<link type="text/css" rel="stylesheet" href="@routes.Assets.at("stylesheets/lobby.css")"/>
+<script src="@routes.Assets.at("javascripts/bootstrap.min.js")"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+<script src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript" src="http://d3js.org/d3.v3.js">
+		</script>
+<style type="text/css">
+    .bs-example{
+    	margin: 20px;
+    }
+	.node {
+  		stroke: #fff;
+  		stroke-width: 1.5px;
+  		cursor:pointer;
+  	}
+
+	.nodetext {
+  		fill: #000;
+  		font-size:12px;
+  		cursor:pointer;
+  		pointer-events:none;
+ 	}
+</style>
+</head>
+<div class="well span6 transparent">
+@main("Welcome to EEGoVid") {
+
+ <h2>Notifications</h2>
+ @if(output == null) {
+  					<h1>Nothing to display</h1>
+					}else {
+            <table class="table table-hover">
+                <thead>
+                    <th>User ID</th>
+                    <th>Video ID</th>
+                    <th>Rating</th>
+                   	</tr>
+                </thead>
+                <tbody>
+                <tr>
+                 
+					<a href="@routes.Application.lobby2("ratings")">Data Sample 1   </a>
+					<a href="@routes.Application.lobby2("ratings3")">Data Sample 2   </a>
+					<a href="@routes.Application.lobby2("ratingsv")">Data Sample 3   </a><br>
+					Recommendations using Mahout User-Based Comparison based on 
+					@output.size() Users<br>
+						<tr>
+                		@for(a <- 0 to output.size()-1){
+  						<tr>
+  						@for(b <- 0 to output.get(a).size()-1){
+  							<td>@output.get(a).get(b)</td>
+  							}
+  						</tr>
+              		  	}
+							}
+              		  
+              
+                </tr>
+                
+                </tbody>
+            </table>
+            <script type="text/javascript">
+		var width = 600;
+    	var height = 600;
+
+
+    	//Random choose one color from 20 colors
+    	var color = d3.scale.category20();
+
+    	//Define svg
+		var svg = d3.select("body").append("svg")
+    	.attr("width", width)
+    	.attr("height", height);
+		svg.append("rect")
+    		.attr("width", "100%")
+   			.attr("height", "100%")
+    		.attr("fill", "gray");
+    	//Define force property
+		var force = d3.layout.force()
+		.charge(-150)
+		.linkDistance(100)
+    	.size([width, height]);
+
+		d3.json(jsonname, function(error, graph) {
+  			force
+  				.nodes(graph.nodes)
+  				.links(graph.links)
+  				.start();
+
+  			//Define link	
+  			var link = svg.selectAll(".link")
+	  		.data(graph.links)
+	  		.enter()
+	  		.append("line")
+	  		.attr("class", "link")
+	  		.attr("stroke","#09F")
+	  		.attr("stroke-opacity","0.4")
+	  		.style("stroke-width",function(d){return d.value;});
+  			
+  			//Define node
+  			var node = svg.selectAll(".node")
+	 	 	.data(graph.nodes)
+	  		.enter()
+	  		.append("g")
+	  		.call(force.drag);	
+
+	  		//Define circle property
+			node.append("circle")
+	  		.attr("class", "node")
+	  		.attr("r",function(d){return 10+d.group;})
+	  		.style("fill", function(d) { return color(d.group); });
+
+	  		//Define click pending
+	  		node.append("title")
+	  		.text(function(d) { return d.name; });
+
+	  		//Display name on node
+	  		node.append("text")
+	  		.attr("dy", ".3em")
+	  		.attr("class","nodetext")
+	  		.style("text-anchor", "middle")
+	  		.text(function(d) { return d.name; });
+
+
+
+	  		link.append("text")
+	  		.attr("dy", ".3em")
+	  		.attr("class","nodetext")
+	  		.style("text-anchor", "middle")
+    		.text(function(d) {
+        		console.log(d.value);
+         		return d.value;
+    		});
+
+	  		//Force movement
+	  		force.on("tick", function() {
+				link.attr("x1", function(d) { return d.source.x; })
+					.attr("y1", function(d) { return d.source.y; })
+					.attr("x2", function(d) { return d.target.x; })
+					.attr("y2", function(d) { return d.target.y; });
+		
+				node.attr("transform", function(d){ return "translate("+d.x+"," + d.y + ")";});
+			});
+  		
+  		});
+		</script>
+
+</div>
+<div class="well span8">
+        <h2>Video Selection</h2>
+        <p>Select one of the @videos.size video(s) below</p>
+        <div class = "bs-example">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Length</th>
+                    <th>Cover Image</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @videos.map { video =>
+                <tr> 
+              		  <td><a href="@routes.Application.go(video.id)">@video.id</a></td>
+              		  <td><a href="@routes.Application.go(video.id)">@video.name</a></td>
+                   <td><a href="@routes.Application.go(video.id)">@video.length</a></td>
+                    <td><a href="@routes.Application.go(video.id)"><img src="/assets/images/@video.coverImage"></a></td>
+                    
+                </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+<div class="well span8">
+        <div, id="notifications">
+           
+            
+            
+            }
+</div>
+</div>

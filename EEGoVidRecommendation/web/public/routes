@@ -1,0 +1,22 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Application.lobby()
+GET     /upload                     controllers.Application.upload()
+#POST    /login                     controllers.Application.authenticate()
+#GET     /logout                    controllers.Application.logout()
+#GET     /register                  controllers.Application.showRegister()
+#POST    /register                  controllers.Application.register()
+GET     /lobby                      controllers.Application.lobby()
+GET     /:recommender/lobby2        controllers.Application.lobby2(recommender:String)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+
+# Sub pages
+
+GET     /:videoID/video/	      	controllers.Application.go(videoID:Long)
+GET     /:videoID/video/extract    	controllers.Application.extractFeature(videoID:Long)

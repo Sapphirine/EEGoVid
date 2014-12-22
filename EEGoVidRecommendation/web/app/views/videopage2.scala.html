@@ -1,0 +1,65 @@
+@(theVideo: Videos, theFeature: String, youtubeSearch: String, exframe: String)
+<!DOCTYPE HTML>
+<head>
+<link type="text/css" rel="stylesheet" href="@routes.Assets.at("stylesheets/lobby.css")"/>
+<script src="@routes.Assets.at("javascripts/bootstrap.min.js")"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+<script src="http://code.jquery.com/jquery.js"></script>
+<style type="text/css">
+    .bs-example{
+    	margin: 20px;
+    }
+</style>
+</head>
+<div class="well span8">
+        <h2>Information for the video: @theVideo.name</h2>
+        <div class = "bs-example">
+            <table class="table table-hover">
+                      <thead>
+                    <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Length</th>
+                    <th>Cover Image</th>
+                    <th>Extracted Image</th>
+                    <th>Interest Levels</th>
+                    <th>Extracted Feature</th>
+                    </tr>
+                </thead>
+                <tbody>
+              
+                <tr>
+              		  <td>@theVideo.id</td>
+              		  <td>@theVideo.name</td>
+                   <td>@theVideo.length</td>
+                    <td><img src="/assets/images/@theVideo.coverImage"></td>
+                    <td><a href="http://eegovid.herokuapp.com/assets/images/@exframe"><img src="/assets/images/@exframe"></a></td>
+                    <td>@theVideo.feature</td>
+                </tr>
+                
+                </tbody>
+            </table>
+        </div>
+        <a href="@routes.Application.lobby()">Back to Videos List</a><br>
+        <a href="@routes.Application.extractFeature(theVideo.id)">Extract Features and Suggest New Video</a>
+    </div>
+<div class="well span8">
+        <div, id="notifications">
+            <h2>Notifications</h2>
+            <table class="table table-hover">
+                
+                <tbody>
+                <tr>
+                The extracted feature is: <br>
+                <b>@theFeature</b><br>
+                <a href=@youtubeSearch>Click Here For YouTube Suggestion</a>
+              
+                </tr>
+                
+                </tbody>
+            </table>
+            
+            
+            
+</div>
+</div>

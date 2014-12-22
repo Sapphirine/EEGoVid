@@ -1,0 +1,14 @@
+{ "nodes":
+[ {"name":"1","group":3},
+{"name":"3","group":3},
+{"name":"4","group":3},
+{"name":"13714","group":1},
+{"name":"45294","group":1},
+{"name":"77461","group":1},
+{"name":"80411","group":1},
+{"name":"94154","group":1}],
+"links":[{"source":3,"target":0,"value":3},
+ {"source":4,"target":0,"value":4},
+  {"source":5,"target":1,"value":2},
+   {"source":6,"target":0,"value":4},
+    {"source":7,"target":2,"value":3}]}
